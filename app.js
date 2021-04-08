@@ -5,6 +5,8 @@ const createError = require('http-errors');
 const logger = require('morgan');
 const express = require('express');
 
+require('./config/db.config')
+
 const app = express();
 
 /* Middlewares */
