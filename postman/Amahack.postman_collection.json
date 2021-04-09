@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "6bc1e36f-978e-43db-b5a6-e9f0baa0e2f5",
+		"name": "Amahack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"plaso@mail.com\",\n    \"password\": \"12345678\",\n    \"name\": \"Pablo Laso\",\n    \"address\": \"Calle Desengaño 21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/users",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Link\",\n    \"description\": \"Link stop biting me\",\n    \"price\": 20,\n    \"categories\": [\"Pets\"],\n    \"image\": \"https://cataas.com/cat/says/100?width=470&height=264&nocache=100\",\n    \"user\": \"6070d0fa536d01d832b1b567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/products",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/products",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/products/6070d380237e57d96c6aa0c0",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"products",
+								"6070d380237e57d96c6aa0c0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
