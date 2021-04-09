@@ -9,6 +9,7 @@ const SALT_WORK_FACTOR = 10;
 const userSchema = mongoose.Schema(
   {
     email: {
+      unique: true,
       type: String,
       required: 'Email is required',
       match: [EMAIL_PATTERN, 'Email is not valid']

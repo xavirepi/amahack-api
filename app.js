@@ -14,6 +14,11 @@ const app = express();
 app.use(express.json());
 app.use(logger('dev'));
 
+/* Routes */
+
+const routes = require('./config/routes.config')
+app.use('/api', routes)
+
 /* Handle Errors */
 
 app.use((req, res, next) => {

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
-const Review = require('./Review.model')
-const User = require('./User.model')
+const categories = require('../constants/categories')
+
+require('./Review.model')
+require('./User.model')
 
 const productSchema = new mongoose.Schema(
   {
@@ -16,6 +18,10 @@ const productSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: 'Price is required'
+    },
+    categories: {
+      type: [String],
+      enum: categories
     },
     image: {
       type: String,
@@ -34,9 +40,9 @@ const productSchema = new mongoose.Schema(
       }
     },
     user: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       required: 'A user needs to be referenced',
-      ref: User.modelName
+      ref: 'User'
     }
   },
   {
@@ -54,7 +60,7 @@ const productSchema = new mongoose.Schema(
 )
 
 productSchema.virtual('reviews', {
-  ref: Review.modelName,
+  ref: 'Review',
   localField: '_id',
   foreignField: 'product'
 })

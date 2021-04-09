@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const Product = require('./Product.model')
-const User = require('./User.model')
+require('./User.model')
+require('./Product.model')
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -18,14 +18,14 @@ const reviewSchema = new mongoose.Schema(
       max: 5
     },
     product: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       required: 'A product needs to be referenced',
-      ref: Product.modelName
+      ref: 'Product'
     },
     user: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       required: 'A user needs to be referenced',
-      ref: User.modelName
+      ref: 'User'
     }
   },
   {
