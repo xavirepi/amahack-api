@@ -33,6 +33,60 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"Kip_Schinner@yahoo.com\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/login",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzBlMDM1NTA0M2ViZTE1YzIzMzE0NiIsImlhdCI6MTYxODAxNTkyNCwiZXhwIjoxNjE4MDE1OTM0fQ.ugX4U7Ey4VwqNIVtTcPKTxm8xXbAX2hZ7nk9wLByXrw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API_URL}}/users/me",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -42,11 +96,21 @@
 				{
 					"name": "Create product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzBlMDM1NTA0M2ViZTE1YzIzMzE0NiIsImlhdCI6MTYxODAxNjIwOSwiZXhwIjoxNjE4MTAyNjA5fQ.XS8Qp5KZCBbtD_pk5xY75OTkWaoCS4X_SdCl_HuT9ug",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Link\",\n    \"description\": \"Link stop biting me\",\n    \"price\": 20,\n    \"categories\": [\"Pets\"],\n    \"image\": \"https://cataas.com/cat/says/100?width=470&height=264&nocache=100\",\n    \"user\": \"6070d0fa536d01d832b1b567\"\n}",
+							"raw": "{\n    \"name\": \"Link\",\n    \"description\": \"Link stop biting me\",\n    \"price\": 20,\n    \"categories\": [\"Pets\"],\n    \"image\": \"https://cataas.com/cat/says/100?width=470&height=264&nocache=100\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
