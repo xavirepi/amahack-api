@@ -31,6 +31,8 @@ module.exports.get = (req, res, next) => {
 }
 
 module.exports.create = (req, res, next) => {
+  req.body.user = req.currentUser
+
   Product.create(req.body)
     .then(product => res.status(201).json(product))
     .catch(next)
