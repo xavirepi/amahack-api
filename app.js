@@ -35,6 +35,7 @@ app.use((error, req, res, next) => {
     console.error(error);
   }
 
+  // Used to render errors
   const data = {}
   data.message = error.message;
   data.errors = error.errors ? 
@@ -42,7 +43,7 @@ app.use((error, req, res, next) => {
       .reduce((errors, key) => ({ ...errors, [key]: error.errors[key].message || error.errors[key] }), {}) :
     undefined;
 
-  res.status(error.status).json(data)
+  res.status(error.status).json(data) // res.render turns to this now
 });
 
 const port = Number(process.env.PORT || 3001);
