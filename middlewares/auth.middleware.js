@@ -8,20 +8,21 @@ module.exports.isAuthenticated = (req, res, next) => {
 
     if (authHeader) { // We must check whether the heder has arrived
         // Check auth protocol (Bearer)
-        const autoProtocol = authHeader.split(' ')[0] // This should be Bearer (log authHeader example: Bearer XXXXXX)
+        const authProtocol = authHeader.split(' ')[0] // This should be Bearer (log authHeader example: Bearer XXXXXX)
 
-        if (autoProtocol === 'Bearer') {
+        if (authProtocol === 'Bearer') {
             // Token verification - If verification fails JWT library will throw an exception (which will be handled later on)
             jwt.verify( // JWT library method
                 authHeader.split(' ')[1] || '', // The second position of authHeader.split(' ') is the actual token. If we don't have anything we add || '' so the library can throw an error
                 process.env.JWT_SECRET,
-                (error, dedoded) => { // Callback that either fails or returns the payload (decoded)
+                (error, decoded) => { // Callback that either fails or returns the payload (decoded)
                     if (error) {
                         next(error) // Errors middlewares will handle the error
                     }
 
                     if (decoded) {
-                        req.
+                        req.currentUser = decoded.id // In the requests where the user must be authenticated we just run this middleware that decodes the token and returns the payload. In this case the user id, which was what we added to the payload when the access token was signed.
+                        next()
                     }
                 }
             )

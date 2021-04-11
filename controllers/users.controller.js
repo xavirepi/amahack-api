@@ -36,19 +36,18 @@ module.exports.authenticate = (req, res, next) => { // This used to be saved inc
       if (!user) {
         next(createError(404, { errors: { email: 'Email or password are not valid'} })) // To avoid compromising our emails DB in the message we should avoid specifying the error
       } else {
-        return user.checkPassword(password) // Returns a promise because it takes a bit long to hash
+        return user.checkPassword(password) // .checkPassword() static method returns a promise because it takes a bit long to hash
           .then(match => { // The previous promise returns either true or false and this is passed to the argument
-            if (!match) { // If false (not match) --> Return an error message (again not specific)
+            if (!match) { // If false (not match) --> Return an error message (again not specific to protect our emails DB)
               next(createError(404, { errors: { email: 'Email or password are not valid'} }))
-            } else { // If user.checkPassword static method returns true then we create the JWT using sign method (Docs: https://github.com/auth0/node-jsonwebtoken)
+            } else { // If user.checkPassword static method returns true then we create the JWT using the library sign method (Docs: https://github.com/auth0/node-jsonwebtoken)
               // Generate JWT Token
-
               res.json({
                 access_token: jwt.sign( // The token that the Front will save to make requests through JWT (Saved into Local Storage)
-                  { id: user._id }, // We send id to the payload (this information will be public)
+                  { id: user._id }, // We send "id" to the payload (this information will be public)
                   process.env.JWT_SECRET || 'JWT Secret - It should be changed', // The secret is use to sign - whithout it the token can't be verified and it won't be returned
                   {
-                    expiresIn: '1d' // Specified in the docs how to indicate the expiration (Docs: https://github.com/auth0/node-jsonwebtoken)
+                    expiresIn: '5m' // Specified in the docs how to indicate the expiration (Docs: https://github.com/auth0/node-jsonwebtoken)
                   }
                 )
               })
