@@ -2,6 +2,7 @@ const createError = require('http-errors')
 const Product = require('../models/Product.model')
 
 module.exports.list = (req, res, next) => {
+  // Some filters are applied to render products
   const criteria = {}
   const { category, search } = req.query
 
@@ -13,16 +14,16 @@ module.exports.list = (req, res, next) => {
     criteria.categories = { '$in': [category] }
   }
 
-  Product.find(criteria)
+  Product.find(criteria) // .find with the filtered products
     .then(products => res.json(products))
     .catch(next)
 }
 
-module.exports.get = (req, res, next) => {
+module.exports.get = (req, res, next) => { // Returns a specific product
   Product.findById(req.params.id)
     .then(product => {
       if (!product) {
-        next(createError(404, 'Product not found'))
+        next(createError(404, 'Product not found')) // Throws and exception if the product hasn't been found
       } else {
         res.json(product)
       }

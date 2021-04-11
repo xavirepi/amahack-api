@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next(createError(404, 'Route not found'));
 });
 
-app.use((error, req, res, next) => {
+app.use((error, req, res, next) => { // Middleware use to create errors so we don't have to create them every time inside the controllers
   if (error instanceof mongoose.Error.ValidationError) error = createError(400, error)
   else if (error instanceof mongoose.Error.CastError) error = createError(404, 'Resource not found')
   else if (error.message.includes('E11000')) error = createError(400, 'Already exists')
@@ -46,7 +46,7 @@ app.use((error, req, res, next) => {
   res.status(error.status).json(data) // res.render turns to this now
 });
 
-const port = Number(process.env.PORT || 3001);
+const port = Number(process.env.PORT || 3001); // The API will run on port 3001 while React will do it on port 3000
 
 app.listen(port, () => {
   console.log(`Ready! Listen on port ${port}`);

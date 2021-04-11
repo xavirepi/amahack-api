@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const categories = require('../constants/categories')
+const categories = require('../constants/categories') // Categories is exported to an external directory so it's more practical if they're updated in the future
 
 require('./Review.model')
 require('./User.model')
@@ -21,12 +21,12 @@ const productSchema = new mongoose.Schema(
     },
     categories: {
       type: [String],
-      enum: categories
+      enum: categories // If a passed category is not included in the "enum" the field won't be valid (Imported from "constants" directory)
     },
     image: {
       type: String,
       required: 'Image is required',
-      validate: {
+      validate: { // Check notes on validation in "image" field in "User" model
         validator: value => {
           try {
             const url = new URL(value)
@@ -39,7 +39,7 @@ const productSchema = new mongoose.Schema(
         message: () => 'Invalid image URL'
       }
     },
-    user: {
+    user: { // The user who created the product
       type: mongoose.Types.ObjectId,
       required: 'A user needs to be referenced',
       ref: 'User'
@@ -59,6 +59,7 @@ const productSchema = new mongoose.Schema(
   }
 )
 
+// Virtual specifying how the product is going to appear in the review model
 productSchema.virtual('reviews', {
   ref: 'Review',
   localField: '_id',
