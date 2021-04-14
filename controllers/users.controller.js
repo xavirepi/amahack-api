@@ -47,7 +47,7 @@ module.exports.authenticate = (req, res, next) => { // This used to be saved inc
                   { id: user._id }, // We send "id" to the payload (this information will be public)
                   process.env.JWT_SECRET || 'JWT Secret - It should be changed', // The secret is use to sign - whithout it the token can't be verified and it won't be returned
                   {
-                    expiresIn: '5m' // Specified in the docs how to indicate the expiration (Docs: https://github.com/auth0/node-jsonwebtoken)
+                    expiresIn: '1d' // Specified in the docs how to indicate the expiration (Docs: https://github.com/auth0/node-jsonwebtoken)
                   }
                 )
               })

@@ -6,7 +6,7 @@ module.exports.isAuthenticated = (req, res, next) => {
     // Get Authorization header
     const authHeader = req.header('Authorization') // We get the header in Express using req.header and passing the string we want
 
-    if (authHeader) { // We must check whether the heder has arrived
+    if (authHeader) { // We must check whether the header has arrived
         // Check auth protocol (Bearer)
         const authProtocol = authHeader.split(' ')[0] // This should be Bearer (log authHeader example: Bearer XXXXXX)
 
